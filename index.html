@@ -6,9 +6,7 @@
 <title>Una invitación especial ❤️</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
@@ -29,9 +27,7 @@ body{
   position:relative;
 }
 
-.screen.active{
-  display:flex;
-}
+.screen.active{display:flex}
 
 .card{
   max-width:430px;
@@ -45,15 +41,8 @@ body{
   animation:fade .7s ease;
 }
 
-h1{
-  font-size:31px;
-  margin-bottom:15px;
-}
-
-p{
-  font-size:18px;
-  line-height:1.55;
-}
+h1{font-size:31px;margin-bottom:15px}
+p{font-size:18px;line-height:1.55}
 
 button{
   border:none;
@@ -65,30 +54,19 @@ button{
   font-weight:bold;
 }
 
-.primary{
-  background:#ff4f9a;
-  color:white;
-}
-
-.secondary{
-  background:rgba(255,255,255,0.22);
-  color:white;
-}
+.primary{background:#ff4f9a;color:white}
+.secondary{background:rgba(255,255,255,0.22);color:white}
 
 #noBtn{
   position:absolute;
   background:#ffffff33;
   color:white;
+  z-index:10;
 }
 
-.small{
-  font-size:14px;
-  opacity:.85;
-}
+.small{font-size:14px;opacity:.85}
 
-.mission{
-  text-align:left;
-}
+.mission{text-align:left}
 
 .mission div{
   background:rgba(255,255,255,.13);
@@ -102,16 +80,17 @@ button{
   color:#fff;
   animation:float 6s linear infinite;
   opacity:.75;
+  pointer-events:none;
 }
 
 @keyframes fade{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
+  from{opacity:0; transform:translateY(20px)}
+  to{opacity:1; transform:translateY(0)}
 }
 
 @keyframes float{
-  from{transform:translateY(100vh) scale(.7);}
-  to{transform:translateY(-10vh) scale(1.2);}
+  from{transform:translateY(100vh) scale(.7)}
+  to{transform:translateY(-10vh) scale(1.2)}
 }
 </style>
 </head>
@@ -145,7 +124,7 @@ button{
   <div class="card">
     <h1>Entonces...</h1>
     <p>¿Aceptarías salir conmigo este sábado 4 por la noche? 🌙❤️</p>
-    <button class="primary" onclick="next('s3','s4')">Sí 💖</button>
+    <button class="primary" id="siBtn" onclick="next('s3','s4')">Sí 💖</button>
     <button id="noBtn">No 😢</button>
     <p id="noText" class="small"></p>
   </div>
@@ -220,9 +199,10 @@ function next(actual, siguiente){
 
 const noBtn = document.getElementById("noBtn");
 const noText = document.getElementById("noText");
+const siBtn = document.getElementById("siBtn");
 
 let intentosNo = 0;
-  
+
 const frases = [
   "No seas malita 🥺",
   "Piénsalo otra vez...",
@@ -251,35 +231,52 @@ const frases = [
   "Está bien... creo que ya entendí. Mejor te dejo elegir el Sí 💖"
 ];
 
-function moverNo(){
+function moverNo(e){
+  if(e){
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
   intentosNo++;
 
   if(intentosNo >= 25){
-    noText.innerText = frases[24];
+    noText.innerHTML = frases[24];
+
     noBtn.style.transition = "all .8s ease";
     noBtn.style.opacity = "0";
-    noBtn.style.transform = "scale(0.5) rotate(20deg)";
-    siBtn = document.querySelector('#s3 .primary');
-    siBtn.style.transform = "scale(1.15)";
-    siBtn.style.boxShadow = "0 0 25px rgba(255,255,255,.8)";
-    setTimeout(() => {
+    noBtn.style.transform = "scale(0.4) rotate(180deg)";
+
+    siBtn.style.transition = ".5s";
+    siBtn.style.transform = "scale(1.18)";
+    siBtn.style.boxShadow = "0 0 30px rgba(255,255,255,.9)";
+
+    setTimeout(()=>{
       noBtn.style.display = "none";
-    }, 900);
+    },900);
+
     return;
   }
 
-  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 20);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 20);
+
+  noBtn.style.left = Math.max(10, x) + "px";
+  noBtn.style.top = Math.max(10, y) + "px";
   noBtn.style.transform = `rotate(${Math.random()*30 - 15}deg)`;
-  noText.innerText = frases[intentosNo - 1];
+
+  noText.innerHTML = frases[intentosNo - 1];
 }
 
-noBtn.addEventListener("mouseover", moverNo);
-noBtn.addEventListener("click", moverNo);
-noBtn.addEventListener("touchstart", moverNo);
-  
+noBtn.addEventListener("mouseenter", moverNo);
+
+noBtn.addEventListener("click", function(e){
+  moverNo(e);
+});
+
+noBtn.addEventListener("touchstart", function(e){
+  moverNo(e);
+}, {passive:false});
+
 function crearCorazon(){
   const heart = document.createElement("div");
   heart.className = "heart";
