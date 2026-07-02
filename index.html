@@ -202,6 +202,7 @@ const noText = document.getElementById("noText");
 const siBtn = document.getElementById("siBtn");
 
 let intentosNo = 0;
+let bloqueoNo = false;
 
 const frases = [
   "No seas malita 🥺",
@@ -232,9 +233,10 @@ const frases = [
 ];
 
 function moverNo(e){
-  if(e){
-  e.preventDefault();
-  }
+  if(e) e.preventDefault();
+
+  if(bloqueoNo) return;
+  bloqueoNo = true;
 
   intentosNo++;
 
@@ -256,17 +258,25 @@ function moverNo(e){
     return;
   }
 
-  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 20);
-  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 20);
-
-  noBtn.style.left = Math.max(10, x) + "px";
-  noBtn.style.top = Math.max(10, y) + "px";
-  noBtn.style.transform = `rotate(${Math.random()*30 - 15}deg)`;
-
   noText.innerHTML = frases[intentosNo - 1];
+
+  const margen = 40;
+  const maxX = window.innerWidth - noBtn.offsetWidth - margen;
+  const maxY = window.innerHeight - noBtn.offsetHeight - margen;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.left = Math.max(margen, x) + "px";
+  noBtn.style.top = Math.max(margen, y) + "px";
+  noBtn.style.transform = `rotate(${Math.random()*24 - 12}deg)`;
+
+  setTimeout(()=>{
+    bloqueoNo = false;
+  },600);
 }
 
-noBtn.addEventListener("pointerdown", moverNo);
+noBtn.addEventListener("click", moverNo);
 
 function crearCorazon(){
   const heart = document.createElement("div");
