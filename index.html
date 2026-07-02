@@ -221,26 +221,65 @@ function next(actual, siguiente){
 const noBtn = document.getElementById("noBtn");
 const noText = document.getElementById("noText");
 
+let intentosNo = 0;
+  
 const frases = [
   "No seas malita 🥺",
-  "Piénsalo bien...",
+  "Piénsalo otra vez...",
   "Prometo que valdrá la pena ❤️",
   "Ese botón no quiere funcionar 🤭",
-  "Mejor dale al Sí 💖"
+  "Casi lo logras 😅",
+  "¿Segura segura? 🥺",
+  "Mira que preparé algo bonito...",
+  "El botón está nervioso 😂",
+  "Mejor dale al Sí 💖",
+  "No te arrepentirás 🌙",
+  "Todavía puedes cambiar de opinión 🤭",
+  "Creo que ese botón está dañado 😅",
+  "El destino dice que no es por ahí ✨",
+  "Una oportunidad nomás 🥺",
+  "Ya casi llegas al final...",
+  "Prometo que será especial ❤️",
+  "El No se está cansando 😂",
+  "Ya llevas muchos intentos 😭",
+  "La sorpresa te va a gustar 🌊",
+  "No hagas sufrir al botón Sí 💖",
+  "El universo está mirando 👀",
+  "Mejor piensa bonito ❤️",
+  "La noche promete ✨",
+  "Última oportunidad para el No...",
+  "Está bien... creo que ya entendí. Mejor te dejo elegir el Sí 💖"
 ];
 
 function moverNo(){
+  intentosNo++;
+
+  if(intentosNo >= 25){
+    noText.innerText = frases[24];
+    noBtn.style.transition = "all .8s ease";
+    noBtn.style.opacity = "0";
+    noBtn.style.transform = "scale(0.5) rotate(20deg)";
+    siBtn = document.querySelector('#s3 .primary');
+    siBtn.style.transform = "scale(1.15)";
+    siBtn.style.boxShadow = "0 0 25px rgba(255,255,255,.8)";
+    setTimeout(() => {
+      noBtn.style.display = "none";
+    }, 900);
+    return;
+  }
+
   const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
   const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
-  noText.innerText = frases[Math.floor(Math.random()*frases.length)];
+  noBtn.style.transform = `rotate(${Math.random()*30 - 15}deg)`;
+  noText.innerText = frases[intentosNo - 1];
 }
 
 noBtn.addEventListener("mouseover", moverNo);
 noBtn.addEventListener("click", moverNo);
 noBtn.addEventListener("touchstart", moverNo);
-
+  
 function crearCorazon(){
   const heart = document.createElement("div");
   heart.className = "heart";
