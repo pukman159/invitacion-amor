@@ -233,8 +233,7 @@ const frases = [
 
 function moverNo(e){
   if(e){
-    e.preventDefault();
-    e.stopPropagation();
+  e.preventDefault();
   }
 
   intentosNo++;
@@ -267,15 +266,7 @@ function moverNo(e){
   noText.innerHTML = frases[intentosNo - 1];
 }
 
-noBtn.addEventListener("mouseenter", moverNo);
-
-noBtn.addEventListener("click", function(e){
-  moverNo(e);
-});
-
-noBtn.addEventListener("touchstart", function(e){
-  moverNo(e);
-}, {passive:false});
+noBtn.addEventListener("pointerdown", moverNo);
 
 function crearCorazon(){
   const heart = document.createElement("div");
