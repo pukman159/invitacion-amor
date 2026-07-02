@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una invitación especial ❤️</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:'Segoe UI', Arial, sans-serif;
+  background:linear-gradient(135deg,#12001f,#39105c,#ff6fae);
+  color:white;
+  overflow:hidden;
+}
+
+.screen{
+  display:none;
+  min-height:100vh;
+  padding:28px;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  position:relative;
+}
+
+.screen.active{
+  display:flex;
+}
+
+.card{
+  max-width:430px;
+  width:100%;
+  background:rgba(255,255,255,0.13);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:28px;
+  padding:28px 22px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 0 40px rgba(255,255,255,0.16);
+  animation:fade .7s ease;
+}
+
+h1{
+  font-size:31px;
+  margin-bottom:15px;
+}
+
+p{
+  font-size:18px;
+  line-height:1.55;
+}
+
+button{
+  border:none;
+  border-radius:25px;
+  padding:14px 26px;
+  margin:10px;
+  font-size:17px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.primary{
+  background:#ff4f9a;
+  color:white;
+}
+
+.secondary{
+  background:rgba(255,255,255,0.22);
+  color:white;
+}
+
+#noBtn{
+  position:absolute;
+  background:#ffffff33;
+  color:white;
+}
+
+.small{
+  font-size:14px;
+  opacity:.85;
+}
+
+.mission{
+  text-align:left;
+}
+
+.mission div{
+  background:rgba(255,255,255,.13);
+  padding:12px;
+  border-radius:15px;
+  margin:10px 0;
+}
+
+.heart{
+  position:absolute;
+  color:#fff;
+  animation:float 6s linear infinite;
+  opacity:.75;
+}
+
+@keyframes fade{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes float{
+  from{transform:translateY(100vh) scale(.7);}
+  to{transform:translateY(-10vh) scale(1.2);}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<div class="screen active" id="s1">
+  <div class="card">
+    <h1>Hola, niña ❤️</h1>
+    <p>Preparé esto especialmente para ti.</p>
+    <p class="small">Antes de continuar, puedes activar la música.</p>
+    <button class="primary" onclick="playMusic()">🎵 Activar música</button>
+    <button class="secondary" onclick="next('s1','s2')">Comenzar ✨</button>
+  </div>
+</div>
+
+<div class="screen" id="s2">
+  <div class="card">
+    <h1>Quería decirte algo...</h1>
+    <p>Hay momentos que no solo se recuerdan...</p>
+    <p>Hay momentos que se preparan con cariño para vivirlos bonito.</p>
+    <button class="primary" onclick="next('s2','s3')">Continuar ❤️</button>
+  </div>
+</div>
+
+<div class="screen" id="s3">
+  <div class="card">
+    <h1>Entonces...</h1>
+    <p>¿Aceptarías salir conmigo este sábado 4 por la noche? 🌙❤️</p>
+    <button class="primary" onclick="next('s3','s4')">Sí 💖</button>
+    <button id="noBtn">No 😢</button>
+    <p id="noText" class="small"></p>
+  </div>
+</div>
+
+<div class="screen" id="s4">
+  <div class="card">
+    <h1>Sabía que aceptarías ❤️</h1>
+    <p>Gracias por darme esta oportunidad de prepararte algo especial.</p>
+    <button class="primary" onclick="next('s4','s5')">Tengo una sorpresa 🎁</button>
+  </div>
+</div>
+
+<div class="screen" id="s5">
+  <div class="card mission">
+    <h1>🌙 Misión aceptada</h1>
+
+    <div>📅 <b>Fecha:</b><br>Este sábado 4</div>
+
+    <div>🕗 <b>Hora:</b><br>Entre las 8:00 p. m. y 8:20 p. m.</div>
+
+    <div>🚖 <b>Movilidad:</b><br>Una movilidad pasará por ti. No tendrás que preocuparte por cómo llegar.</div>
+
+    <div>👗 <b>Dress code:</b><br>
+      🧥 Lleva una casaca o abrigo.<br>
+      👟 Usa calzado cómodo.<br>
+      ✨ Un outfit bonito y cómodo.<br>
+      💖 Y tu sonrisa.
+    </div>
+
+    <div>📍 <b>Destino:</b><br>Clasificado 🔒</div>
+
+    <p style="text-align:center;">Solo quiero que disfrutes la sorpresa. Del resto me encargo yo. ❤️</p>
+
+    <button class="primary" onclick="next('s5','s6')">Entendido ✨</button>
+  </div>
+</div>
+
+<div class="screen" id="s6">
+  <div class="card">
+    <h1>🚖 Mensaje importante</h1>
+    <p>Tu movilidad ya tendrá instrucciones especiales.</p>
+    <p>Solo necesito que estés lista entre <b>8:00 p. m. y 8:20 p. m.</b></p>
+    <p>Cuando llegue... solo súbete.</p>
+    <p>No hagas muchas preguntas 🤭</p>
+    <button class="primary" onclick="next('s6','s7')">Prometido ❤️</button>
+  </div>
+</div>
+
+<div class="screen" id="s7">
+  <div class="card">
+    <h1>Gracias por aceptar esta invitación ❤️</h1>
+    <p>El destino seguirá siendo un secreto...</p>
+    <p>Pero prometo que esa noche estará llena de momentos bonitos.</p>
+    <p>Nos vemos este sábado. 🌙✨</p>
+    <p class="small">PD: No olvides la casaca... podrías necesitarla 🤭</p>
+  </div>
+</div>
+
+<script>
+const music = document.getElementById("music");
+music.volume = 0.22;
+
+function playMusic(){
+  music.play();
+}
+
+function next(actual, siguiente){
+  document.getElementById(actual).classList.remove("active");
+  document.getElementById(siguiente).classList.add("active");
+}
+
+const noBtn = document.getElementById("noBtn");
+const noText = document.getElementById("noText");
+
+const frases = [
+  "No seas malita 🥺",
+  "Piénsalo bien...",
+  "Prometo que valdrá la pena ❤️",
+  "Ese botón no quiere funcionar 🤭",
+  "Mejor dale al Sí 💖"
+];
+
+function moverNo(){
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+  noText.innerText = frases[Math.floor(Math.random()*frases.length)];
+}
+
+noBtn.addEventListener("mouseover", moverNo);
+noBtn.addEventListener("click", moverNo);
+noBtn.addEventListener("touchstart", moverNo);
+
+function crearCorazon(){
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = Math.random()*18 + 14 + "px";
+  heart.style.animationDuration = Math.random()*3 + 4 + "s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),7000);
+}
+
+setInterval(crearCorazon,500);
+</script>
+
+</body>
+</html>
