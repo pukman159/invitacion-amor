@@ -125,7 +125,7 @@ button{
     <h1>Entonces...</h1>
     <p>¿Aceptarías salir conmigo este sábado 4 por la noche? 🌙❤️</p>
     <button class="primary" id="siBtn" onclick="next('s3','s4')">Sí 💖</button>
-    <button id="noBtn">No 😢</button>
+    <button id="noBtn" type="button">No 😢</button>
     <p id="noText" class="small"></p>
   </div>
 </div>
@@ -199,10 +199,6 @@ function next(actual, siguiente){
 
 const noBtn = document.getElementById("noBtn");
 const noText = document.getElementById("noText");
-const siBtn = document.getElementById("siBtn");
-
-let intentosNo = 0;
-let bloqueoNo = false;
 
 const frases = [
   "No seas malita 🥺",
@@ -215,68 +211,34 @@ const frases = [
   "El botón está nervioso 😂",
   "Mejor dale al Sí 💖",
   "No te arrepentirás 🌙",
-  "Todavía puedes cambiar de opinión 🤭",
-  "Creo que ese botón está dañado 😅",
-  "El destino dice que no es por ahí ✨",
-  "Una oportunidad nomás 🥺",
-  "Ya casi llegas al final...",
-  "Prometo que será especial ❤️",
-  "El No se está cansando 😂",
-  "Ya llevas muchos intentos 😭",
   "La sorpresa te va a gustar 🌊",
-  "No hagas sufrir al botón Sí 💖",
-  "El universo está mirando 👀",
-  "Mejor piensa bonito ❤️",
   "La noche promete ✨",
   "Última oportunidad para el No...",
-  "Está bien... creo que ya entendí. Mejor te dejo elegir el Sí 💖"
+  "Está bien... mejor dale al Sí 💖"
 ];
 
+let contador = 0;
+
 function moverNo(e){
-  if(e) e.preventDefault();
-
-  if(bloqueoNo) return;
-  bloqueoNo = true;
-
-  intentosNo++;
-
-  if(intentosNo >= 150){
-    noText.innerHTML = frases[24];
-
-    noBtn.style.transition = "all .8s ease";
-    noBtn.style.opacity = "0";
-    noBtn.style.transform = "scale(0.4) rotate(180deg)";
-
-    siBtn.style.transition = ".5s";
-    siBtn.style.transform = "scale(1.18)";
-    siBtn.style.boxShadow = "0 0 30px rgba(255,255,255,.9)";
-
-    setTimeout(()=>{
-      noBtn.style.display = "none";
-    },900);
-
-    return;
+  if(e){
+    e.preventDefault();
+    e.stopPropagation();
   }
 
-  noText.innerHTML = frases[intentosNo - 1];
+  noText.innerHTML = frases[contador % frases.length];
+  contador++;
 
-  const margen = 40;
-  const maxX = window.innerWidth - noBtn.offsetWidth - margen;
-  const maxY = window.innerHeight - noBtn.offsetHeight - margen;
-
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
+  const margen = 30;
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - margen);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - margen);
 
   noBtn.style.left = Math.max(margen, x) + "px";
   noBtn.style.top = Math.max(margen, y) + "px";
-  noBtn.style.transform = `rotate(${Math.random()*24 - 12}deg)`;
-
-  setTimeout(()=>{
-    bloqueoNo = false;
-  },600);
+  noBtn.style.transform = `rotate(${Math.random()*30 - 15}deg)`;
 }
 
-noBtn.addEventListener("click", moverNo);
+noBtn.onclick = moverNo;
+noBtn.ontouchstart = moverNo;
 
 function crearCorazon(){
   const heart = document.createElement("div");
