@@ -20,7 +20,7 @@ body{
 .screen{
   display:none;
   min-height:100vh;
-  padding:28px;
+  padding:24px;
   justify-content:center;
   align-items:center;
   text-align:center;
@@ -32,6 +32,7 @@ body{
 .card{
   max-width:430px;
   width:100%;
+  min-height:300px;
   background:rgba(255,255,255,0.13);
   border:1px solid rgba(255,255,255,0.25);
   border-radius:28px;
@@ -39,6 +40,7 @@ body{
   backdrop-filter:blur(12px);
   box-shadow:0 0 40px rgba(255,255,255,0.16);
   animation:fade .7s ease;
+  position:relative;
 }
 
 h1{font-size:31px;margin-bottom:15px}
@@ -61,7 +63,13 @@ button{
   position:absolute;
   background:#ffffff33;
   color:white;
-  z-index:10;
+  left:55%;
+  top:205px;
+  z-index:20;
+}
+
+#siBtn{
+  transition:.4s;
 }
 
 .small{font-size:14px;opacity:.85}
@@ -92,6 +100,12 @@ button{
   from{transform:translateY(100vh) scale(.7)}
   to{transform:translateY(-10vh) scale(1.2)}
 }
+
+@media(max-width:480px){
+  h1{font-size:27px}
+  p{font-size:16px}
+  .card{min-height:310px}
+}
 </style>
 </head>
 
@@ -121,7 +135,7 @@ button{
 </div>
 
 <div class="screen" id="s3">
-  <div class="card">
+  <div class="card" id="questionCard">
     <h1>Entonces...</h1>
     <p>¿Aceptarías salir conmigo este sábado 4 por la noche? 🌙❤️</p>
     <button class="primary" id="siBtn" onclick="next('s3','s4')">Sí 💖</button>
@@ -143,9 +157,7 @@ button{
     <h1>🌙 Misión aceptada</h1>
 
     <div>📅 <b>Fecha:</b><br>Este sábado 4</div>
-
     <div>🕗 <b>Hora:</b><br>Entre las 8:00 p. m. y 8:20 p. m.</div>
-
     <div>🚖 <b>Movilidad:</b><br>Una movilidad pasará por ti. No tendrás que preocuparte por cómo llegar.</div>
 
     <div>👗 <b>Dress code:</b><br>
@@ -199,6 +211,10 @@ function next(actual, siguiente){
 
 const noBtn = document.getElementById("noBtn");
 const noText = document.getElementById("noText");
+const siBtn = document.getElementById("siBtn");
+const questionCard = document.getElementById("questionCard");
+
+let contadorNo = 0;
 
 const frases = [
   "No seas malita 🥺",
@@ -211,13 +227,22 @@ const frases = [
   "El botón está nervioso 😂",
   "Mejor dale al Sí 💖",
   "No te arrepentirás 🌙",
+  "Todavía puedes cambiar de opinión 🤭",
+  "Creo que ese botón está dañado 😅",
+  "El destino dice que no es por ahí ✨",
+  "Una oportunidad nomás 🥺",
+  "Ya casi llegas al final...",
+  "Prometo que será especial ❤️",
+  "El No se está cansando 😂",
+  "Ya llevas muchos intentos 😭",
   "La sorpresa te va a gustar 🌊",
+  "No hagas sufrir al botón Sí 💖",
+  "El universo está mirando 👀",
+  "Mejor piensa bonito ❤️",
   "La noche promete ✨",
   "Última oportunidad para el No...",
-  "Está bien... mejor dale al Sí 💖"
+  "Está bien... creo que ya entendí. Mejor te dejo elegir el Sí 💖"
 ];
-
-let contador = 0;
 
 function moverNo(e){
   if(e){
@@ -225,20 +250,33 @@ function moverNo(e){
     e.stopPropagation();
   }
 
-  noText.innerHTML = frases[contador % frases.length];
-  contador++;
+  noText.innerHTML = frases[contadorNo % frases.length];
+  contadorNo++;
 
-  const margen = 30;
-  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - margen);
-  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - margen);
+  const cardWidth = questionCard.clientWidth;
+  const cardHeight = questionCard.clientHeight;
 
-  noBtn.style.left = Math.max(margen, x) + "px";
-  noBtn.style.top = Math.max(margen, y) + "px";
-  noBtn.style.transform = `rotate(${Math.random()*30 - 15}deg)`;
+  const minX = 25;
+  const maxX = cardWidth - noBtn.offsetWidth - 25;
+
+  const minY = 185;
+  const maxY = Math.min(cardHeight - noBtn.offsetHeight - 30, 255);
+
+  const x = minX + Math.random() * (maxX - minX);
+  const y = minY + Math.random() * (maxY - minY);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+  noBtn.style.transform = `rotate(${Math.random()*24 - 12}deg)`;
+
+  if(contadorNo >= 25){
+    noText.innerHTML = "Está bien... creo que el universo quiere que presiones Sí 💖";
+    siBtn.style.transform = "scale(1.15)";
+    siBtn.style.boxShadow = "0 0 28px rgba(255,255,255,.9)";
+  }
 }
 
-noBtn.onclick = moverNo;
-noBtn.ontouchstart = moverNo;
+noBtn.addEventListener("click", moverNo);
 
 function crearCorazon(){
   const heart = document.createElement("div");
