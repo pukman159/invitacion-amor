@@ -1,61 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Una invitación especial ❤️</title>
 
 <style>
-:root{
-  --bg1:#080716;
-  --bg2:#15112d;
-  --bg3:#35164f;
-  --pink:#ff5ca8;
-  --pink2:#ff8cc7;
-  --white:rgba(255,255,255,.92);
-  --glass:rgba(255,255,255,.12);
-  --border:rgba(255,255,255,.22);
-}
-
 *{box-sizing:border-box}
 
 body{
   margin:0;
   min-height:100vh;
-  font-family:"Segoe UI", Arial, sans-serif;
+  font-family:'Segoe UI', Arial, sans-serif;
+  background:linear-gradient(135deg,#12001f,#39105c,#ff6fae);
   color:white;
   overflow:hidden;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255,92,168,.20), transparent 25%),
-    radial-gradient(circle at 80% 10%, rgba(111,99,255,.18), transparent 28%),
-    linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
-}
-
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background-image:
-    radial-gradient(#fff 1px, transparent 1px),
-    radial-gradient(#fff 1px, transparent 1px);
-  background-size:70px 70px,110px 110px;
-  background-position:0 0,35px 55px;
-  opacity:.18;
-  animation:stars 18s linear infinite;
-  pointer-events:none;
-}
-
-@keyframes stars{
-  from{transform:translateY(0)}
-  to{transform:translateY(-80px)}
 }
 
 .screen{
   display:none;
   min-height:100vh;
-  padding:22px;
-  align-items:center;
+  padding:24px;
   justify-content:center;
+  align-items:center;
   text-align:center;
   position:relative;
 }
@@ -63,170 +30,81 @@ body::before{
 .screen.active{display:flex}
 
 .card{
+  max-width:430px;
   width:100%;
-  max-width:450px;
-  background:var(--glass);
-  border:1px solid var(--border);
-  border-radius:32px;
-  padding:30px 24px;
-  backdrop-filter:blur(18px);
-  box-shadow:0 25px 70px rgba(0,0,0,.35);
-  animation:enter .65s ease both;
+  min-height:300px;
+  background:rgba(255,255,255,0.13);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:28px;
+  padding:28px 22px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 0 40px rgba(255,255,255,0.16);
+  animation:fade .7s ease;
   position:relative;
 }
 
-@keyframes enter{
-  from{opacity:0; transform:translateY(18px) scale(.98)}
-  to{opacity:1; transform:translateY(0) scale(1)}
-}
-
-.badge{
-  display:inline-block;
-  padding:7px 13px;
-  border-radius:999px;
-  background:rgba(255,255,255,.13);
-  border:1px solid rgba(255,255,255,.18);
-  font-size:13px;
-  margin-bottom:12px;
-  opacity:.9;
-}
-
-h1{
-  font-size:31px;
-  margin:8px 0 14px;
-  letter-spacing:-.4px;
-}
-
-p{
-  font-size:17px;
-  line-height:1.6;
-  color:var(--white);
-}
+h1{font-size:31px;margin-bottom:15px}
+p{font-size:18px;line-height:1.55}
 
 button{
   border:none;
-  border-radius:999px;
-  padding:14px 24px;
-  margin:9px;
-  font-size:16px;
-  font-weight:700;
+  border-radius:25px;
+  padding:14px 26px;
+  margin:10px;
+  font-size:17px;
   cursor:pointer;
-  transition:.25s ease;
+  font-weight:bold;
 }
 
-button:active{transform:scale(.97)}
-
-.primary{
-  background:linear-gradient(135deg,var(--pink),var(--pink2));
-  color:white;
-  box-shadow:0 12px 28px rgba(255,92,168,.28);
-}
-
-.secondary{
-  background:rgba(255,255,255,.16);
-  color:white;
-  border:1px solid rgba(255,255,255,.18);
-}
-
-.music-pill{
-  position:fixed;
-  top:14px;
-  right:14px;
-  z-index:50;
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.20);
-  border-radius:999px;
-  padding:9px 13px;
-  font-size:13px;
-  backdrop-filter:blur(12px);
-  display:none;
-}
-
-.music-pill.show{display:block}
-
-.type{
-  min-height:96px;
-  white-space:pre-line;
-}
-
-.no-zone{
-  position:relative;
-  height:145px;
-  margin:8px auto 0;
-  max-width:360px;
-  border:1px dashed rgba(255,255,255,.18);
-  border-radius:24px;
-  background:rgba(255,255,255,.06);
-  overflow:hidden;
-}
+.primary{background:#ff4f9a;color:white}
+.secondary{background:rgba(255,255,255,0.22);color:white}
 
 #noBtn{
   position:absolute;
-  left:58%;
-  top:34px;
-  background:rgba(255,255,255,.18);
+  background:#ffffff33;
   color:white;
-  border:1px solid rgba(255,255,255,.22);
+  left:55%;
+  top:205px;
+  z-index:20;
 }
 
 #siBtn{
-  transition:.35s ease;
+  transition:.4s;
 }
 
-.small{
-  font-size:14px;
-  opacity:.88;
-  min-height:24px;
-}
+.small{font-size:14px;opacity:.85}
 
-.details{
-  text-align:left;
-  display:grid;
-  gap:10px;
-  margin-top:12px;
-}
+.mission{text-align:left}
 
-.detail{
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:18px;
-  padding:13px 14px;
-  line-height:1.45;
-}
-
-.lock{
-  letter-spacing:2px;
-  opacity:.85;
-}
-
-.check{
-  font-size:52px;
-  margin:8px 0;
-  animation:pulse .9s ease infinite alternate;
-}
-
-@keyframes pulse{
-  to{transform:scale(1.08)}
+.mission div{
+  background:rgba(255,255,255,.13);
+  padding:12px;
+  border-radius:15px;
+  margin:10px 0;
 }
 
 .heart{
-  position:fixed;
-  bottom:-30px;
+  position:absolute;
+  color:#fff;
+  animation:float 6s linear infinite;
+  opacity:.75;
   pointer-events:none;
-  opacity:.72;
-  animation:floatUp linear forwards;
 }
 
-@keyframes floatUp{
-  to{transform:translateY(-110vh) rotate(20deg); opacity:0}
+@keyframes fade{
+  from{opacity:0; transform:translateY(20px)}
+  to{opacity:1; transform:translateY(0)}
+}
+
+@keyframes float{
+  from{transform:translateY(100vh) scale(.7)}
+  to{transform:translateY(-10vh) scale(1.2)}
 }
 
 @media(max-width:480px){
-  .card{padding:26px 19px;border-radius:28px}
   h1{font-size:27px}
   p{font-size:16px}
-  button{font-size:15px;padding:13px 21px}
-  .no-zone{height:135px}
+  .card{min-height:310px}
 }
 </style>
 </head>
@@ -237,139 +115,104 @@ button:active{transform:scale(.97)}
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
-<div class="music-pill" id="musicPill">🎵 Música activada</div>
-
-<section class="screen active" id="s1">
+<div class="screen active" id="s1">
   <div class="card">
-    <div class="badge">✨ Invitación especial</div>
-    <h1>Hola, niña</h1>
-    <p>Preparé algo pequeño para ti.</p>
-    <p>Solo necesito que avances con calma.</p>
-    <button class="primary" onclick="next('s1','s2')">Comenzar ✨</button>
+    <h1>Hola, niña ❤️</h1>
+    <p>Preparé esto especialmente para ti.</p>
+    <p class="small">Antes de continuar, puedes activar la música.</p>
+    <button class="primary" onclick="playMusic()">🎵 Activar música</button>
+    <button class="secondary" onclick="next('s1','s2')">Comenzar ✨</button>
   </div>
-</section>
+</div>
 
-<section class="screen" id="s2">
+<div class="screen" id="s2">
   <div class="card">
-    <div class="badge">🎧 Recomendación</div>
-    <h1>Antes de seguir...</h1>
-    <p>Si puedes, usa audífonos y activa la música.</p>
-    <button class="primary" onclick="playMusic()">▶ Activar música</button>
-    <button class="secondary" onclick="next('s2','s3')">Continuar sin esperar ❤️</button>
-  </div>
-</section>
-
-<section class="screen" id="s3">
-  <div class="card">
-    <div class="badge">💌 Un mensajito</div>
     <h1>Quería decirte algo...</h1>
-    <p class="type" id="typedText"></p>
-    <button class="primary" id="typedBtn" style="display:none" onclick="next('s3','s4')">Continuar ❤️</button>
+    <p>Hay momentos que no solo se recuerdan...</p>
+    <p>Hay momentos que se preparan con cariño para vivirlos bonito.</p>
+    <button class="primary" onclick="next('s2','s3')">Continuar ❤️</button>
   </div>
-</section>
+</div>
 
-<section class="screen" id="s4">
-  <div class="card">
-    <div class="badge">🌙 Una pregunta</div>
+<div class="screen" id="s3">
+  <div class="card" id="questionCard">
     <h1>Entonces...</h1>
-    <p>¿Aceptarías salir conmigo este sábado 4 por la noche?</p>
-
-    <button class="primary" id="siBtn" onclick="aceptarInvitacion()">Sí 💖</button>
-
-    <div class="no-zone" id="noZone">
-      <button id="noBtn" type="button">No 😢</button>
-    </div>
-
+    <p>¿Aceptarías salir conmigo este sábado 4 por la noche? 🌙❤️</p>
+    <button class="primary" id="siBtn" onclick="next('s3','s4')">Sí 💖</button>
+    <button id="noBtn" type="button">No 😢</button>
     <p id="noText" class="small"></p>
   </div>
-</section>
+</div>
 
-<section class="screen" id="s5">
+<div class="screen" id="s4">
   <div class="card">
-    <div class="check">✔</div>
-    <h1>Gracias por confiar en mí.</h1>
-    <p>Ahora sí puedo contarte algunas cositas importantes para esa noche.</p>
-    <button class="primary" onclick="next('s5','s6')">Ver los detalles ✨</button>
+    <h1>Sabía que aceptarías ❤️</h1>
+    <p>Gracias por darme esta oportunidad de prepararte algo especial.</p>
+    <button class="primary" onclick="next('s4','s5')">Tengo una sorpresa 🎁</button>
   </div>
-</section>
+</div>
 
-<section class="screen" id="s6">
-  <div class="card">
-    <div class="badge">🔒 Información reservada</div>
-    <h1>Tu invitación</h1>
+<div class="screen" id="s5">
+  <div class="card mission">
+    <h1>🌙 Misión aceptada</h1>
 
-    <div class="details">
-      <div class="detail">📅 <b>Fecha:</b><br>Este sábado 4</div>
-      <div class="detail">🕗 <b>Hora:</b><br>Entre las 8:00 p. m. y 8:20 p. m.</div>
-      <div class="detail">🚖 <b>Movilidad:</b><br>Una movilidad pasará por ti. No tendrás que preocuparte por cómo llegar.</div>
-      <div class="detail">👕 <b>Recomendación:</b><br>Casaca ligera, calzado cómodo y un outfit casual que te haga sentir bonita.</div>
-      <div class="detail">📍 <b>Destino:</b><br><span class="lock">████████████</span><br>Clasificado 🔒</div>
+    <div>📅 <b>Fecha:</b><br>Este sábado 4</div>
+    <div>🕗 <b>Hora:</b><br>Entre las 8:00 p. m. y 8:20 p. m.</div>
+    <div>🚖 <b>Movilidad:</b><br>Una movilidad pasará por ti. No tendrás que preocuparte por cómo llegar.</div>
+
+    <div>👗 <b>Dress code:</b><br>
+      🧥 Lleva una casaca o abrigo.<br>
+      👟 Usa calzado cómodo.<br>
+      ✨ Un outfit bonito y cómodo.<br>
+      💖 Y tu sonrisa.
     </div>
 
-    <p>Solo quiero que disfrutes la sorpresa. Del resto me encargo yo. ❤️</p>
-    <button class="primary" onclick="next('s6','s7')">Entendido ✨</button>
-  </div>
-</section>
+    <div>📍 <b>Destino:</b><br>Clasificado 🔒</div>
 
-<section class="screen" id="s7">
-  <div class="card">
-    <div class="badge">✨ Último mensaje</div>
-    <h1>Gracias por decir que sí ❤️</h1>
-    <p>No diré más para no arruinar la sorpresa.</p>
-    <p>Solo prepárate para una noche pensada con mucho cariño.</p>
-    <p><b>Nos vemos este sábado.</b></p>
-    <p class="small">PD: No olvides la casaca 🤭</p>
+    <p style="text-align:center;">Solo quiero que disfrutes la sorpresa. Del resto me encargo yo. ❤️</p>
+
+    <button class="primary" onclick="next('s5','s6')">Entendido ✨</button>
   </div>
-</section>
+</div>
+
+<div class="screen" id="s6">
+  <div class="card">
+    <h1>🚖 Mensaje importante</h1>
+    <p>Tu movilidad ya tendrá instrucciones especiales.</p>
+    <p>Solo necesito que estés lista entre <b>8:00 p. m. y 8:20 p. m.</b></p>
+    <p>Cuando llegue... solo súbete.</p>
+    <p>No hagas muchas preguntas 🤭</p>
+    <button class="primary" onclick="next('s6','s7')">Prometido ❤️</button>
+  </div>
+</div>
+
+<div class="screen" id="s7">
+  <div class="card">
+    <h1>Gracias por aceptar esta invitación ❤️</h1>
+    <p>El destino seguirá siendo un secreto...</p>
+    <p>Pero prometo que esa noche estará llena de momentos bonitos.</p>
+    <p>Nos vemos este sábado. 🌙✨</p>
+    <p class="small">PD: No olvides la casaca... podrías necesitarla 🤭</p>
+  </div>
+</div>
 
 <script>
 const music = document.getElementById("music");
-const musicPill = document.getElementById("musicPill");
 music.volume = 0.22;
 
 function playMusic(){
-  music.play().then(()=>{
-    musicPill.classList.add("show");
-    next("s2","s3");
-  }).catch(()=>{
-    next("s2","s3");
-  });
+  music.play();
 }
 
 function next(actual, siguiente){
   document.getElementById(actual).classList.remove("active");
   document.getElementById(siguiente).classList.add("active");
-
-  if(siguiente === "s3"){
-    setTimeout(typeMessage, 250);
-  }
-}
-
-const typedText = document.getElementById("typedText");
-const typedBtn = document.getElementById("typedBtn");
-const message = "Hay momentos que no solo se recuerdan...\n\nHay momentos que se preparan con cariño para vivirlos bonito.\n\nY yo quiero compartir uno de esos momentos contigo.";
-let typeIndex = 0;
-let alreadyTyped = false;
-
-function typeMessage(){
-  if(alreadyTyped) return;
-  alreadyTyped = true;
-
-  const interval = setInterval(()=>{
-    typedText.textContent += message.charAt(typeIndex);
-    typeIndex++;
-
-    if(typeIndex >= message.length){
-      clearInterval(interval);
-      typedBtn.style.display = "inline-block";
-    }
-  }, 38);
 }
 
 const noBtn = document.getElementById("noBtn");
-const noZone = document.getElementById("noZone");
 const noText = document.getElementById("noText");
 const siBtn = document.getElementById("siBtn");
+const questionCard = document.getElementById("questionCard");
 
 let contadorNo = 0;
 
@@ -392,7 +235,7 @@ const frases = [
   "Prometo que será especial ❤️",
   "El No se está cansando 😂",
   "Ya llevas muchos intentos 😭",
-  "La sorpresa te va a gustar ✨",
+  "La sorpresa te va a gustar 🌊",
   "No hagas sufrir al botón Sí 💖",
   "El universo está mirando 👀",
   "Mejor piensa bonito ❤️",
@@ -402,49 +245,52 @@ const frases = [
 ];
 
 function moverNo(e){
-  e.preventDefault();
-  e.stopPropagation();
+  if(e){
+    e.preventDefault();
+    e.stopPropagation();
+  }
 
   noText.innerHTML = frases[contadorNo % frases.length];
   contadorNo++;
 
-  const maxX = noZone.clientWidth - noBtn.offsetWidth;
-  const maxY = noZone.clientHeight - noBtn.offsetHeight;
+  const cardWidth = questionCard.clientWidth;
+  const cardHeight = questionCard.clientHeight;
 
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
+  const minX = 25;
+  const maxX = cardWidth - noBtn.offsetWidth - 25;
+
+  const minY = 185;
+  const maxY = Math.min(cardHeight - noBtn.offsetHeight - 30, 255);
+
+  const x = minX + Math.random() * (maxX - minX);
+  const y = minY + Math.random() * (maxY - minY);
 
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
-  noBtn.style.transform = `rotate(${Math.random()*20 - 10}deg)`;
+  noBtn.style.transform = `rotate(${Math.random()*24 - 12}deg)`;
 
   if(contadorNo >= 25){
     noText.innerHTML = "Está bien... creo que el universo quiere que presiones Sí 💖";
-    siBtn.style.transform = "scale(1.16)";
-    siBtn.style.boxShadow = "0 0 30px rgba(255,255,255,.9)";
+    siBtn.style.transform = "scale(1.15)";
+    siBtn.style.boxShadow = "0 0 28px rgba(255,255,255,.9)";
   }
 }
 
 noBtn.addEventListener("click", moverNo);
 
-function aceptarInvitacion(){
-  next("s4","s5");
-}
-
 function crearCorazon(){
   const heart = document.createElement("div");
   heart.className = "heart";
-  heart.innerHTML = Math.random() > .45 ? "❤️" : "✨";
+  heart.innerHTML = "❤️";
   heart.style.left = Math.random()*100 + "vw";
-  heart.style.fontSize = (Math.random()*16 + 12) + "px";
-  heart.style.animationDuration = (Math.random()*3 + 4) + "s";
+  heart.style.fontSize = Math.random()*18 + 14 + "px";
+  heart.style.animationDuration = Math.random()*3 + 4 + "s";
   document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),7500);
+  setTimeout(()=>heart.remove(),7000);
 }
 
-setInterval(crearCorazon,650);
+setInterval(crearCorazon,500);
 </script>
 
 </body>
 </html>
-
